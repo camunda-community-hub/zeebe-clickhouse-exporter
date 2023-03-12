@@ -127,6 +127,34 @@ Query id: 790c13cc-5066-49c0-9068-4e6e610b8cf0
 chk :)
 ```
 
+## ClickHouse Query Element Instance Records
+```
+chk :) select * from ELEMENT_INSTANCE where PROCESS_INSTANCE_KEY_=2251799813689134 order by TIMESTAMP_ asc;
+
+SELECT *
+FROM ELEMENT_INSTANCE
+WHERE PROCESS_INSTANCE_KEY_ = 2251799813689134
+ORDER BY TIMESTAMP_ ASC
+
+Query id: ebbffa4f-c188-47b1-99a4-3d18e84645bb
+
+┌─ID──────┬─────────────KEY_─┬─BPMN_PROCESS_ID_─┬─PROCESS_DEFINITION_KEY_─┬──────────────TIMESTAMP_─┬─INTENT_─────────────┬─PARTITION_ID_─┬─POSITION_─┬─PROCESS_INSTANCE_KEY_─┬──FLOW_SCOPE_KEY_─┬─ELEMENT_ID_──────┬─BPMN_ELEMENT_TYPE_─┐
+│ 1-9991  │ 2251799813689134 │ Process_1udqk7z  │        2251799813685323 │ 2023-03-12 11:29:13.349 │ ELEMENT_ACTIVATING  │             1 │      9991 │      2251799813689134 │               -1 │ Process_1udqk7z  │ PROCESS            │
+│ 1-9992  │ 2251799813689134 │ Process_1udqk7z  │        2251799813685323 │ 2023-03-12 11:29:13.349 │ ELEMENT_ACTIVATED   │             1 │      9992 │      2251799813689134 │               -1 │ Process_1udqk7z  │ PROCESS            │
+│ 1-9994  │ 2251799813689137 │ Process_1udqk7z  │        2251799813685323 │ 2023-03-12 11:29:13.349 │ ELEMENT_ACTIVATING  │             1 │      9994 │      2251799813689134 │ 2251799813689134 │ StartEvent_1     │ START_EVENT        │
+│ 1-9995  │ 2251799813689137 │ Process_1udqk7z  │        2251799813685323 │ 2023-03-12 11:29:13.349 │ ELEMENT_ACTIVATED   │             1 │      9995 │      2251799813689134 │ 2251799813689134 │ StartEvent_1     │ START_EVENT        │
+│ 1-9997  │ 2251799813689137 │ Process_1udqk7z  │        2251799813685323 │ 2023-03-12 11:29:13.352 │ ELEMENT_COMPLETING  │             1 │      9997 │      2251799813689134 │ 2251799813689134 │ StartEvent_1     │ START_EVENT        │
+│ 1-9998  │ 2251799813689137 │ Process_1udqk7z  │        2251799813685323 │ 2023-03-12 11:29:13.352 │ ELEMENT_COMPLETED   │             1 │      9998 │      2251799813689134 │ 2251799813689134 │ StartEvent_1     │ START_EVENT        │
+│ 1-9999  │ 2251799813689138 │ Process_1udqk7z  │        2251799813685323 │ 2023-03-12 11:29:13.352 │ SEQUENCE_FLOW_TAKEN │             1 │      9999 │      2251799813689134 │ 2251799813689134 │ Flow_0j9gwbw     │ SEQUENCE_FLOW      │
+│ 1-10001 │ 2251799813689139 │ Process_1udqk7z  │        2251799813685323 │ 2023-03-12 11:29:13.356 │ ELEMENT_ACTIVATING  │             1 │     10001 │      2251799813689134 │ 2251799813689134 │ Activity_0v39lo1 │ USER_TASK          │
+│ 1-10003 │ 2251799813689139 │ Process_1udqk7z  │        2251799813685323 │ 2023-03-12 11:29:13.356 │ ELEMENT_ACTIVATED   │             1 │     10003 │      2251799813689134 │ 2251799813689134 │ Activity_0v39lo1 │ USER_TASK          │
+└─────────┴──────────────────┴──────────────────┴─────────────────────────┴─────────────────────────┴─────────────────────┴───────────────┴───────────┴───────────────────────┴──────────────────┴──────────────────┴────────────────────┘
+
+9 rows in set. Elapsed: 0.044 sec. Processed 9.09 thousand rows, 1.43 MB (204.70 thousand rows/s., 32.24 MB/s.)
+
+chk :)
+```
+
 ## ClickHouse Query Timer Records
 ```
 chk :) select * from TIMER limit 10;
@@ -228,7 +256,7 @@ chk :)
 
 ```
 
-##ClickHouse Query Variable Records
+## ClickHouse Query Variable Records
 ```
 chk :) select * from VARIABLE limit 5;
 

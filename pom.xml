@@ -21,8 +21,10 @@
         <clickhouse-jdbc.version>0.4.1</clickhouse-jdbc.version>
         <plugin.compiler.version>3.10.0</plugin.compiler.version>
         <plugin.shade.version>3.2.1</plugin.shade.version>
+        <plugin.spotless.version>2.34.0</plugin.spotless.version>
         <commons-io.version>2.11.0</commons-io.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
+
         <!-- release parent settings -->
         <version.java>17</version.java>
         <nexus.snapshot.repository>https://artifacts.camunda.com/artifactory/zeebe-io-snapshots/
@@ -120,6 +122,7 @@
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
+                <version>${plugin.spotless.version}</version>
                 <configuration>
                     <java>
                         <googleJavaFormat>
