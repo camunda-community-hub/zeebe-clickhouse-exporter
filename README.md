@@ -278,3 +278,28 @@ Query id: 43b29497-c340-4ee5-beed-769e56f46d62
 
 chk :)
 ```
+
+## ClickHouse Query Signal Subscription Records
+```
+chk :) select * from SIGNAL_SUBSCRIPTION order by PROCESS_DEFINITION_KEY_ asc,TIMESTAMP_ asc;
+
+SELECT *
+FROM SIGNAL_SUBSCRIPTION
+ORDER BY
+    PROCESS_DEFINITION_KEY_ ASC,
+    TIMESTAMP_ ASC
+
+Query id: bda77cac-a74a-4123-9f52-f6c14e682c5e
+
+┌─ID_──────────────────────────────────┬─SIGNAL_NAME_───┬──────────────TIMESTAMP_─┬─STATE_──┬─CATCH_ELEMENT_INSTANCE_KEY_─┬─PROCESS_DEFINITION_KEY_─┬─BPMN_PROCESS_ID_─┬─CATCH_EVENT_ID_─┐
+│ 7f43d9eb-6fb9-49f0-90b2-4920560413d4 │ Signal_1mcst4h │ 2023-03-12 14:52:33.197 │ deleted │                          -1 │        2251799813692399 │ Process_1udqk7z  │ StartEvent_1    │
+│ 2307850b-9505-49aa-a368-4f9431d36c5f │ Signal_1mcst4h │ 2023-03-12 14:52:33.197 │ created │                          -1 │        2251799813692405 │ Process_1udqk7z  │ StartEvent_1    │
+│ 7d723b2e-56bd-4d1b-9b07-dafe0ad95e11 │ Signal_3h5lmif │ 2023-03-12 14:54:03.718 │ created │                          -1 │        2251799813692408 │ Process_0k1nnh5  │ StartEvent_1    │
+│ c8603d0a-7935-4bb4-8570-970aa2d0c5a2 │ Signal_3h5lmif │ 2023-03-12 14:54:21.340 │ deleted │                          -1 │        2251799813692408 │ Process_0k1nnh5  │ StartEvent_1    │
+│ eee80948-95d6-402a-9ea6-4657d5aaf1f2 │ Signal_3h5lmif │ 2023-03-12 14:54:21.340 │ created │                          -1 │        2251799813692411 │ Process_0k1nnh5  │ StartEvent_1    │
+└──────────────────────────────────────┴────────────────┴─────────────────────────┴─────────┴─────────────────────────────┴─────────────────────────┴──────────────────┴─────────────────┘
+
+5 rows in set. Elapsed: 0.003 sec.
+
+chk :)
+```

@@ -105,6 +105,12 @@ public class ClickHouseExporterClient {
           configuration.chUser,
           configuration.chPassword,
           ValueType.MESSAGE_SUBSCRIPTION.name());
+      // 创建信号订阅表
+      ClickHouseConfig.CreateSignalSubscriptionTable(
+              configuration.chUrl,
+              configuration.chUser,
+              configuration.chPassword,
+              ValueType.SIGNAL_SUBSCRIPTION.name());
 
     } catch (final SQLException e) {
       e.printStackTrace();
@@ -281,6 +287,22 @@ public class ClickHouseExporterClient {
               configuration.chPassword,
               ValueType.MESSAGE_SUBSCRIPTION.name(),
               record);
+          // 更新记录位置
+          update(lastPostion);
+        } catch (final SQLException e) {
+          e.printStackTrace();
+        }
+      }
+      // 信号启动记录信息
+      if (ValueType.SIGNAL_SUBSCRIPTION.name().equals(record.getValueType().name())) {
+        try {
+
+          SignalSubscriptionImporter.batchSignalSubscriptionInsert(
+                  configuration.chUrl,
+                  configuration.chUser,
+                  configuration.chPassword,
+                  ValueType.SIGNAL_SUBSCRIPTION.name(),
+                  record);
           // 更新记录位置
           update(lastPostion);
         } catch (final SQLException e) {
