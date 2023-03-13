@@ -17,10 +17,10 @@ public class MessageSubscriptionImporter {
     try (final Connection conn = DriverManager.getConnection(url, user, password)) {
       final String sql =
           String.format(
-              "insert into %1$s SETTINGS async_insert=1, wait_for_async_insert=0 select ID_, MESSAGE_NAME_, "
+              "insert into %1$s SETTINGS async_insert=1, wait_for_async_insert=0 select ID_, MESSAGE_NAME_, MESSAGE_KEY_,"
                   + " TIMESTAMP_, STATE_, PROCESS_INSTANCE_KEY_,ELEMENT_INSTANCE_KEY_,"
                   + "  PROCESS_DEFINITION_KEY_,CORRELATION_KEY_,TARGET_FLOW_NODE_ID_"
-                  + " from input('ID_ String,MESSAGE_NAME_ String,"
+                  + " from input('ID_ String,MESSAGE_NAME_ String,MESSAGE_KEY_ Int64,"
                   + " TIMESTAMP_ DateTime64(3), STATE_ String,"
                   + " PROCESS_INSTANCE_KEY_ Int64,ELEMENT_INSTANCE_KEY_ Int64,PROCESS_DEFINITION_KEY_ Int64,"
                   + " CORRELATION_KEY_ Nullable(String),TARGET_FLOW_NODE_ID_ Nullable(String)')",
@@ -32,18 +32,19 @@ public class MessageSubscriptionImporter {
         ps.setString(1, generateId());
         // 名称
         ps.setString(2, msg.getMessageName());
+        ps.setLong(3, -1L);
         // 记录时间
-        ps.setLong(3, record.getTimestamp());
+        ps.setLong(4, record.getTimestamp());
         // 状态
-        ps.setString(4, record.getIntent().name().toLowerCase());
-        ps.setLong(5, msg.getProcessInstanceKey());
-        ps.setLong(6, msg.getElementInstanceKey());
+        ps.setString(5, record.getIntent().name().toLowerCase());
+        ps.setLong(6, msg.getProcessInstanceKey());
+        ps.setLong(7, msg.getElementInstanceKey());
 
-        ps.setLong(7, -1);
+        ps.setLong(8, -1L);
         // 关联key
-        ps.setString(8, msg.getCorrelationKey());
+        ps.setString(9, msg.getCorrelationKey());
 
-        ps.setString(9, null);
+        ps.setString(10, "");
         ps.addBatch();
         ps.executeBatch();
       }
