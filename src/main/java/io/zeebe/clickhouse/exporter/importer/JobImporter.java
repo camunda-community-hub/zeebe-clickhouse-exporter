@@ -31,7 +31,7 @@ public class JobImporter {
       } else {
         sql =
             String.format(
-                "alter table %1$s SETTINGS async_insert=1, wait_for_async_insert=0 update END_ = toDateTime64(?/1000,3), "
+                "alter table %1$s update END_ = toDateTime64(?/1000,3), "
                     + " WORKER_ =?, RETRIES_=?, STATE_=? "
                     + " where KEY_ = ?",
                 table);
