@@ -1,0 +1,47 @@
+version: "2"
+
+networks:
+  zeebe_network:
+    driver: bridge
+
+services:
+  clickhouse:
+    container_name: clickhouse
+    image: clickhouse/clickhouse-server:22.8.15.23
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    ports:
+      - "8123:8123"
+      - "19600:9600"
+    volumes:
+      - ./clickhouse-config.xml:/etc/clickhouse-server/config.xml
+      - ./clickhouse-users.xml:/etc/clickhouse-server/users.xml
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:8123/ | grep -q Ok" ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    networks:
+      - zeebe_network
+      
+  zeebe:
+    container_name: zeebe_broker
+    image: camunda/zeebe:8.2.0-alpha5
+    environment:
+      - ZEEBE_LOG_LEVEL=debug
+      - ZEEBE_CLICKHOUSE_URL=jdbc:ch://clickhouse/default
+      - ZEEBE_CLICKHOUSE_USER=default
+      - ZEEBE_CLICKHOUSE_PASSWORD=clickhouse123
+    ports:
+      - "26500:26500"
+      - "9600:9600"
+    volumes:
+      - ../target/zeebe-clickhouse-exporter-1.0-SNAPSHOT.jar:/usr/local/zeebe/exporters/zeebe-clickhouse-exporter-1.0-SNAPSHOT.jar
+      - ./application.yaml:/usr/local/zeebe/config/application.yaml
+    networks:
+      - zeebe_network
+    depends_on:
+      - clickhouse      
