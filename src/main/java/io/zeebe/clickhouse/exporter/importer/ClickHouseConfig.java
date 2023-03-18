@@ -227,21 +227,19 @@ public class ClickHouseConfig {
     }
   }
 
-
   public static void CreateSignalSubscriptionTable(
-          final String url, final String user, final String password, final String table)
-          throws SQLException {
+      final String url, final String user, final String password, final String table)
+      throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
-         final Statement stmt = conn.createStatement()) {
+        final Statement stmt = conn.createStatement()) {
       stmt.execute(
-              String.format(
-                      "create table if not exists %1$s (ID_ String,SIGNAL_NAME_ String,"
-                              + " TIMESTAMP_ DateTime64(3),STATE_ String,"
-                              + " CATCH_ELEMENT_INSTANCE_KEY_ Int64,PROCESS_DEFINITION_KEY_ Int64,"
-                              + " BPMN_PROCESS_ID_ String,CATCH_EVENT_ID_ String) "
-                              + " engine = ReplacingMergeTree(TIMESTAMP_) PARTITION BY toYYYYMM(TIMESTAMP_)  ORDER BY ID_",
-                      table));
+          String.format(
+              "create table if not exists %1$s (ID_ String,SIGNAL_NAME_ String,"
+                  + " TIMESTAMP_ DateTime64(3),STATE_ String,"
+                  + " CATCH_ELEMENT_INSTANCE_KEY_ Int64,PROCESS_DEFINITION_KEY_ Int64,"
+                  + " BPMN_PROCESS_ID_ String,CATCH_EVENT_ID_ String) "
+                  + " engine = ReplacingMergeTree(TIMESTAMP_) PARTITION BY toYYYYMM(TIMESTAMP_)  ORDER BY ID_",
+              table));
     }
   }
-
 }

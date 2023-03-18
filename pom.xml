@@ -7,6 +7,14 @@
     <version>1.0-SNAPSHOT</version>
     <name>zeebe-clickhouse-exporter</name>
 
+    <scm>
+      <url>https://github.com/camunda-community-hub/zeebe-clickhouse-exporter</url>
+      <connection>scm:git:git@github.com:camunda-community-hub/zeebe-clickhouse-exporter.git</connection>
+      <developerConnection>scm:git:git@github.com:camunda-community-hub/zeebe-clickhouse-exporter.git
+      </developerConnection>
+      <tag>HEAD</tag>
+    </scm>
+
     <parent>
         <groupId>org.camunda.community</groupId>
         <artifactId>community-hub-release-parent</artifactId>
@@ -15,30 +23,28 @@
     </parent>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version.java>17</version.java>
         <version.zeebe>8.2.0-alpha4</version.zeebe>
         <version.log4j>2.20.0</version.log4j>
         <version.junit>5.9.2</version.junit>
+        <versin.assertj>3.24.2</versin.assertj>
         <clickhouse-jdbc.version>0.4.1</clickhouse-jdbc.version>
         <plugin.compiler.version>3.10.0</plugin.compiler.version>
+        <plugin.enforcer.version>3.1.0</plugin.enforcer.version>
+        <plugin.javadoc.version>3.4.0</plugin.javadoc.version>
+        <plugin.surefire.version>3.0.0-M7</plugin.surefire.version>
+        <plugin.fmt.version>2.19</plugin.fmt.version>
+        <plugin.jacoco.version>0.8.8</plugin.jacoco.version>
         <plugin.shade.version>3.2.1</plugin.shade.version>
         <plugin.spotless.version>2.34.0</plugin.spotless.version>
         <commons-io.version>2.11.0</commons-io.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
 
-        <!-- release parent settings -->
-        <version.java>17</version.java>
-        <nexus.snapshot.repository>https://artifacts.camunda.com/artifactory/zeebe-io-snapshots/
-        </nexus.snapshot.repository>
-        <nexus.release.repository>https://artifacts.camunda.com/artifactory/zeebe-io/
-        </nexus.release.repository>
-
         <!-- disable jdk8 javadoc checks on release build -->
         <additionalparam>-Xdoclint:none</additionalparam>
-
-        <!-- when updating this version, also change it in .idea/externalDependencies.xml -->
-        <plugin.version.google-java-format>1.16.0</plugin.version.google-java-format>
-
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -47,6 +53,13 @@
                 <version>${version.zeebe}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+              <groupId>org.junit</groupId>
+              <artifactId>junit-bom</artifactId>
+              <version>${version.junit}</version>
+              <type>pom</type>
+              <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -80,16 +93,101 @@
             <version>${commons-lang3.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.junit</groupId>
-            <artifactId>junit-bom</artifactId>
-            <version>${version.junit}</version>
-            <type>pom</type>
-            <scope>test</scope>
+          <groupId>org.assertj</groupId>
+          <artifactId>assertj-core</artifactId>
+          <version>${versin.assertj}</version>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter-api</artifactId>
+          <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-enforcer-plugin</artifactId>
+              <version>${plugin.enforcer.version}</version>
+              <configuration>
+                <rules>
+                  <dependencyConvergence/>
+                </rules>
+              </configuration>
+              <executions>
+                <execution>
+                  <phase>verify</phase>
+                  <goals>
+                    <goal>enforce</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-javadoc-plugin</artifactId>
+              <version>${plugin.javadoc.version}</version>
+            </plugin>
+
+            <!-- Google code format plugin -->
+            <plugin>
+              <groupId>com.spotify.fmt</groupId>
+              <artifactId>fmt-maven-plugin</artifactId>
+              <version>${plugin.fmt.version}</version>
+              <executions>
+                <execution>
+                  <goals>
+                    <goal>format</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+
+            <!-- JaCoCo Plugin -->
+            <plugin>
+              <groupId>org.jacoco</groupId>
+              <artifactId>jacoco-maven-plugin</artifactId>
+              <version>${plugin.jacoco.version}</version>
+              <executions>
+                <execution>
+                  <id>coverage-initialize</id>
+                  <goals>
+                    <goal>prepare-agent</goal>
+                  </goals>
+                </execution>
+                <execution>
+                  <id>coverage-report</id>
+                  <phase>post-integration-test</phase>
+                  <goals>
+                    <goal>report</goal>
+                  </goals>
+                </execution>
+                <!-- Threshold -->
+              </executions>
+            </plugin>
+            <!-- Surefire plugin -->
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-surefire-plugin</artifactId>
+              <version>${plugin.surefire.version}</version>
+            </plugin>
+
+            <!-- flaky test extractor plugin -->
+            <plugin>
+              <groupId>io.zeebe</groupId>
+              <artifactId>flaky-test-extractor-maven-plugin</artifactId>
+              <version>2.1.1</version>
+              <executions>
+                <execution>
+                  <phase>post-integration-test</phase>
+                  <goals>
+                    <goal>extract-flaky-tests</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -117,27 +215,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <!-- Google code format plugin -->
-            <plugin>
-                <groupId>com.diffplug.spotless</groupId>
-                <artifactId>spotless-maven-plugin</artifactId>
-                <version>${plugin.spotless.version}</version>
-                <configuration>
-                    <java>
-                        <googleJavaFormat>
-                            <version>${plugin.version.google-java-format}</version>
-                            <style>GOOGLE</style>
-                        </googleJavaFormat>
-                    </java>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.google.googlejavaformat</groupId>
-                        <artifactId>google-java-format</artifactId>
-                        <version>${plugin.version.google-java-format}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>

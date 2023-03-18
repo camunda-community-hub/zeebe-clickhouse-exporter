@@ -1,3 +1,6 @@
+[![Community badge: Incubating](https://img.shields.io/badge/Lifecycle-Incubating-blue)](https://github.com/Camunda-Community-Hub/community/blob/main/extension-lifecycle.md#incubating-)
+[![Community extension badge](https://img.shields.io/badge/Community%20Extension-An%20open%20source%20community%20maintained%20project-FF4700)](https://github.com/camunda-community-hub/community)
+
 # Zeebe ClickHouse Exporter
 
 [Exporters](https://docs.camunda.io/docs/next/components/zeebe/technical-concepts/architecture/#exporters) allow you to tap into the Zeebe event stream on a partition and export selected events to other systems. You can filter events, perform transformations, and even trigger side-effects from an exporter.
@@ -15,9 +18,9 @@ You can export records from Zeebe to ClickHouse and query data from ClickHouse u
 
 [ClickHouse](https://clickhouse.com/clickhouse) is a column-oriented database that enables its users to generate powerful analytics, using SQL queries, in real-time.
 
-ClickHouse is an Open Source OLAP database management system. 
+ClickHouse is an Open Source OLAP database management system.
 
-ClickHouse runs on ClickHouse Cloud or any Linux, FreeBSD, or macOS system with x86_64, AArch64, or PowerPC64LE CPU architecture. 
+ClickHouse runs on ClickHouse Cloud or any Linux, FreeBSD, or macOS system with x86_64, AArch64, or PowerPC64LE CPU architecture.
 
 [ClickHouse Quick Start](https://clickhouse.com/docs/en/getting-started/quick-start/) follow these steps to get up and running with ClickHouse.
 
