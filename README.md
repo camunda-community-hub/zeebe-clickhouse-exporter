@@ -35,7 +35,11 @@ ClickHouse runs on ClickHouse Cloud or any Linux, FreeBSD, or macOS system with 
 
 1. Build the exporter, using `mvn package`.
 2. Copy the resulting `zeebe-clickhouse-exporter-1.0-SNAPSHOT.jar` file to the `exporters` directory of your Zeebe broker.
-3. Edit the `application.xml` file, and add an entry for the exporter:
+3. Edit the `application.xml` file, and add an entry for the exporter, you can change
+
+   * the ClickHouse jdbc url `chUrl`
+   * the ClickHouse user `chUser`
+   * the ClickHouse password `chPassword`
 
 ```
     exporters:
@@ -45,8 +49,14 @@ ClickHouse runs on ClickHouse Cloud or any Linux, FreeBSD, or macOS system with 
         args:
           chUrl: jdbc:ch://127.0.0.1:8123/default
           chUser: default
-          chPassword: clickhouse123
+          chPassword:
 ```
+The values can be overridden by environment variables.
+
+  * set `chUrl` with `ZEEBE_CLICKHOUSE_URL` (e.g. `export ZEEBE_CLICKHOUSE_URL=jdbc:ch://127.0.0.1:8123/default`)
+  * set `chUser` with `ZEEBE_CLICKHOUSE_USER` (e.g. `export ZEEBE_CLICKHOUSE_USER=default`)
+  * set `chPassword` with `ZEEBE_CLICKHOUSE_PASSWORD` (e.g. `export ZEEBE_CLICKHOUSE_PASSWORD=""`)
+
 
 ## ClickHouse Zeebe Tables
 

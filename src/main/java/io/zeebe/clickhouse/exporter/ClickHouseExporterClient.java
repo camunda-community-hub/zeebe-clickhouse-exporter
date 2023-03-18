@@ -23,93 +23,93 @@ public class ClickHouseExporterClient {
     try {
       // 初始化配置表
       ClickHouseConfig.CreateClickHouseConfigTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           clickHouseConfigTable);
       // 检查是否有初始化配置信息
       final long i =
           ClickHouseConfig.queryClickHouseConfig(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               clickHouseConfigTable);
 
       if (i <= 0L) {
         // 执行初始化
         ClickHouseConfig.InitClickHouseConfigTable(
-            configuration.chUrl,
-            configuration.chUser,
-            configuration.chPassword,
+            configuration.getChUrl(),
+            configuration.getChUser(),
+            configuration.getChPassword(),
             clickHouseConfigTable);
       } else {
         cfgPosition = i;
       }
       // 创建流程定义信息表
       ClickHouseConfig.CreateProcessTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           ValueType.PROCESS.name());
       // 创建流程实例表
       ClickHouseConfig.CreateProcessInstanceTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           ValueType.PROCESS_INSTANCE.name());
       // 创建任务实例表
       ClickHouseConfig.CreateElementInstanceTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           elementInstanceTable);
       // 创建调度表
       ClickHouseConfig.CreateJobTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           ValueType.JOB.name());
       // 创建流程变量表
       ClickHouseConfig.CreateVariableTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           ValueType.VARIABLE.name());
       // 创建事件表
       ClickHouseConfig.CreateIncidentTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           ValueType.INCIDENT.name());
       // 创建定时器表
       ClickHouseConfig.CreateTimerTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           ValueType.TIMER.name());
       // 创建异常表
       ClickHouseConfig.CreateErrorTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           ValueType.ERROR.name());
       // 创建消息表
       ClickHouseConfig.CreateMessageTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           ValueType.MESSAGE.name());
       // 创建消息订阅表
       ClickHouseConfig.CreateMessageSubscriptionTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           ValueType.MESSAGE_SUBSCRIPTION.name());
       // 创建信号订阅表
       ClickHouseConfig.CreateSignalSubscriptionTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           ValueType.SIGNAL_SUBSCRIPTION.name());
 
     } catch (final SQLException e) {
@@ -128,9 +128,9 @@ public class ClickHouseExporterClient {
         try {
 
           ProcessImporter.batchProcessInsert(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               ValueType.PROCESS.name(),
               record);
           // 更新记录位置
@@ -145,17 +145,17 @@ public class ClickHouseExporterClient {
 
           // 流程实例信息
           ProcessInstanceImporter.batchProcessInstanceInsertOrUpdate(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               ValueType.PROCESS_INSTANCE.name(),
               record);
 
           // 任务实例信息
           ProcessInstanceImporter.batchElementInstanceInsert(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               elementInstanceTable,
               record);
           // 更新记录位置
@@ -170,9 +170,9 @@ public class ClickHouseExporterClient {
         try {
 
           JobImporter.batchJobInsertOrUpdate(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               ValueType.JOB.name(),
               record);
           // 更新记录位置
@@ -186,9 +186,9 @@ public class ClickHouseExporterClient {
         try {
 
           VariableImporter.batchVariableInsert(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               ValueType.VARIABLE.name(),
               record);
           // 更新记录位置
@@ -202,9 +202,9 @@ public class ClickHouseExporterClient {
         try {
 
           IncidentImporter.batchIncidentInsertOrUpdate(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               ValueType.INCIDENT.name(),
               record);
           // 更新记录位置
@@ -218,9 +218,9 @@ public class ClickHouseExporterClient {
         try {
 
           TimerImporter.batchTimerInsert(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               ValueType.TIMER.name(),
               record);
           // 更新记录位置
@@ -234,9 +234,9 @@ public class ClickHouseExporterClient {
         try {
 
           ErrorImporter.batchErrorInsert(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               ValueType.ERROR.name(),
               record);
           // 更新记录位置
@@ -250,9 +250,9 @@ public class ClickHouseExporterClient {
         try {
 
           MessageImporter.batchMessageInsert(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               ValueType.MESSAGE.name(),
               record);
           // 更新记录位置
@@ -266,9 +266,9 @@ public class ClickHouseExporterClient {
         try {
 
           MessageSubscriptionImporter.batchMessageSubscriptionInsert(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               ValueType.MESSAGE_SUBSCRIPTION.name(),
               record);
           // 更新记录位置
@@ -282,9 +282,9 @@ public class ClickHouseExporterClient {
         try {
 
           MessageSubscriptionImporter.batchMessageStartEventSubscriptionInsert(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               ValueType.MESSAGE_SUBSCRIPTION.name(),
               record);
           // 更新记录位置
@@ -298,9 +298,9 @@ public class ClickHouseExporterClient {
         try {
 
           SignalSubscriptionImporter.batchSignalSubscriptionInsert(
-              configuration.chUrl,
-              configuration.chUser,
-              configuration.chPassword,
+              configuration.getChUrl(),
+              configuration.getChUser(),
+              configuration.getChPassword(),
               ValueType.SIGNAL_SUBSCRIPTION.name(),
               record);
           // 更新记录位置
@@ -316,9 +316,9 @@ public class ClickHouseExporterClient {
   public void update(final long lastPosition) {
     try {
       ClickHouseConfig.updateClickHouseConfigTable(
-          configuration.chUrl,
-          configuration.chUser,
-          configuration.chPassword,
+          configuration.getChUrl(),
+          configuration.getChUser(),
+          configuration.getChPassword(),
           clickHouseConfigTable,
           lastPosition);
     } catch (final SQLException e) {
