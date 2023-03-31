@@ -10,7 +10,7 @@
 
 Read a two-part series about building Zeebe exporters on the Zeebe blog: [Part One](https://camunda.com/blog/2019/05/exporter-part-1/) | [Part Two](https://camunda.com/blog/2019/06/exporter-part-2/).
 
-This [Zeebe ClickHouse Exporter](https://github.com/skayliu/zeebe-clickhouse-exporter) is build on [Zeebe Exporter Demo](https://github.com/jwulf/zeebe-exporter-demo.git) and [ClickHouse Java Libraries](https://github.com/ClickHouse/clickhouse-java.git).
+This [Zeebe ClickHouse Exporter](https://github.com/camunda-community-hub/zeebe-clickhouse-exporter) is build on [Zeebe Exporter Demo](https://github.com/jwulf/zeebe-exporter-demo.git) and [ClickHouse Java Libraries](https://github.com/ClickHouse/clickhouse-java.git).
 
 You can export records from Zeebe to ClickHouse and query data from ClickHouse use you own program language.
 
