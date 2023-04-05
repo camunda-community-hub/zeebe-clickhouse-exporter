@@ -34,7 +34,7 @@
         <versin.assertj>3.24.2</versin.assertj>
         <version.testcontainers>1.17.6</version.testcontainers>
         <version.zeebe-test-container>3.5.2</version.zeebe-test-container>
-        <version.awaitility>4.1.1</version.awaitility>
+        <version.awaitility>4.2.0</version.awaitility>
         <version.clickhouse-jdbc>0.4.2</version.clickhouse-jdbc>
         <version.commons-io>2.11.0</version.commons-io>
         <version.commons-lang3>3.12.0</version.commons-lang3>
