@@ -25,11 +25,21 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.java>17</version.java>
+
+
+        <!-- project dependencies -->
         <version.zeebe>8.2.0-rc1</version.zeebe>
         <version.log4j>2.20.0</version.log4j>
         <version.junit>5.9.2</version.junit>
         <versin.assertj>3.24.2</versin.assertj>
-        <clickhouse-jdbc.version>0.4.2</clickhouse-jdbc.version>
+        <version.testcontainers>1.17.6</version.testcontainers>
+        <version.zeebe-test-container>3.5.2</version.zeebe-test-container>
+        <version.awaitility>4.1.1</version.awaitility>
+        <version.clickhouse-jdbc>0.4.2</version.clickhouse-jdbc>
+        <version.commons-io>2.11.0</version.commons-io>
+        <version.commons-lang3>3.12.0</version.commons-lang3>
+
+        <!-- plugin version -->
         <plugin.compiler.version>3.11.0</plugin.compiler.version>
         <plugin.enforcer.version>3.2.1</plugin.enforcer.version>
         <plugin.javadoc.version>3.5.0</plugin.javadoc.version>
@@ -38,8 +48,7 @@
         <plugin.jacoco.version>0.8.8</plugin.jacoco.version>
         <plugin.shade.version>3.4.1</plugin.shade.version>
         <plugin.spotless.version>2.34.0</plugin.spotless.version>
-        <commons-io.version>2.11.0</commons-io.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
+
 
         <!-- disable jdk8 javadoc checks on release build -->
         <additionalparam>-Xdoclint:none</additionalparam>
@@ -61,6 +70,13 @@
               <type>pom</type>
               <scope>import</scope>
             </dependency>
+            <dependency>
+              <groupId>org.testcontainers</groupId>
+              <artifactId>testcontainers-bom</artifactId>
+              <version>${version.testcontainers}</version>
+              <type>pom</type>
+              <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -73,7 +89,7 @@
         <dependency>
             <groupId>com.clickhouse</groupId>
             <artifactId>clickhouse-jdbc</artifactId>
-            <version>${clickhouse-jdbc.version}</version>
+            <version>${version.clickhouse-jdbc}</version>
             <classifier>http</classifier>
             <exclusions>
                 <exclusion>
@@ -85,12 +101,40 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
+            <version>${version.commons-io}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
+            <version>${version.commons-lang3}</version>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+          <groupId>org.testcontainers</groupId>
+          <artifactId>testcontainers</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.testcontainers</groupId>
+          <artifactId>clickhouse</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>io.zeebe</groupId>
+          <artifactId>zeebe-test-container</artifactId>
+          <version>${version.zeebe-test-container}</version>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.testcontainers</groupId>
+          <artifactId>junit-jupiter</artifactId>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.junit.jupiter</groupId>
+          <artifactId>junit-jupiter-api</artifactId>
+          <scope>test</scope>
         </dependency>
         <dependency>
           <groupId>org.assertj</groupId>
@@ -99,8 +143,9 @@
           <scope>test</scope>
         </dependency>
         <dependency>
-          <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter-api</artifactId>
+          <groupId>org.awaitility</groupId>
+          <artifactId>awaitility</artifactId>
+          <version>${version.awaitility}</version>
           <scope>test</scope>
         </dependency>
     </dependencies>
