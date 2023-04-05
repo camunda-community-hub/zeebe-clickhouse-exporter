@@ -45,7 +45,7 @@
         <plugin.javadoc.version>3.5.0</plugin.javadoc.version>
         <plugin.surefire.version>3.0.0</plugin.surefire.version>
         <plugin.fmt.version>2.19</plugin.fmt.version>
-        <plugin.jacoco.version>0.8.8</plugin.jacoco.version>
+        <plugin.jacoco.version>0.8.9</plugin.jacoco.version>
         <plugin.shade.version>3.4.1</plugin.shade.version>
         <plugin.spotless.version>2.34.0</plugin.spotless.version>
 
