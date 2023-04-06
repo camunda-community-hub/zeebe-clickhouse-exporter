@@ -41,7 +41,7 @@
 
         <!-- plugin version -->
         <plugin.compiler.version>3.11.0</plugin.compiler.version>
-        <plugin.enforcer.version>3.2.1</plugin.enforcer.version>
+        <plugin.enforcer.version>3.3.0</plugin.enforcer.version>
         <plugin.javadoc.version>3.5.0</plugin.javadoc.version>
         <plugin.surefire.version>3.0.0</plugin.surefire.version>
         <plugin.fmt.version>2.19</plugin.fmt.version>
