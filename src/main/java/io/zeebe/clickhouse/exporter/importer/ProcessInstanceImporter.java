@@ -1,3 +1,10 @@
+/*
+ * Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+ * one or more contributor license agreements. See the NOTICE file distributed
+ * with this work for additional information regarding copyright ownership.
+ * Licensed under the Zeebe Community License 1.1. You may not use this file
+ * except in compliance with the Zeebe Community License 1.1.
+ */
 package io.zeebe.clickhouse.exporter.importer;
 
 import io.camunda.zeebe.protocol.record.Record;
@@ -18,7 +25,7 @@ public class ProcessInstanceImporter {
       throws SQLException {
     final Intent intent = record.getIntent();
     try (final Connection conn = DriverManager.getConnection(url, user, password)) {
-      String sql = "";
+      final String sql;
       if (intent == ProcessInstanceIntent.ELEMENT_ACTIVATED) {
         sql =
             String.format(

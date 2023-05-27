@@ -1,10 +1,17 @@
+/*
+ * Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+ * one or more contributor license agreements. See the NOTICE file distributed
+ * with this work for additional information regarding copyright ownership.
+ * Licensed under the Zeebe Community License 1.1. You may not use this file
+ * except in compliance with the Zeebe Community License 1.1.
+ */
 package io.zeebe.clickhouse.exporter.importer;
 
 import java.sql.*;
 
 public class ClickHouseConfig {
 
-  public static void CreateClickHouseConfigTable(
+  public static void createClickHouseConfigTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
@@ -17,7 +24,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void InitClickHouseConfigTable(
+  public static void initClickHouseConfigTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password)) {
@@ -68,7 +75,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void CreateProcessTable(
+  public static void createProcessTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
@@ -82,7 +89,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void CreateProcessInstanceTable(
+  public static void createProcessInstanceTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
@@ -99,7 +106,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void CreateErrorTable(
+  public static void createErrorTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
@@ -114,7 +121,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void CreateTimerTable(
+  public static void createTimerTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
@@ -130,7 +137,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void CreateMessageTable(
+  public static void createMessageTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
@@ -145,7 +152,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void CreateMessageSubscriptionTable(
+  public static void createMessageSubscriptionTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
@@ -161,7 +168,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void CreateElementInstanceTable(
+  public static void createElementInstanceTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
@@ -178,7 +185,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void CreateJobTable(
+  public static void createJobTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
@@ -194,7 +201,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void CreateVariableTable(
+  public static void createVariableTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
@@ -210,7 +217,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void CreateIncidentTable(
+  public static void createIncidentTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);
@@ -227,7 +234,7 @@ public class ClickHouseConfig {
     }
   }
 
-  public static void CreateSignalSubscriptionTable(
+  public static void createSignalSubscriptionTable(
       final String url, final String user, final String password, final String table)
       throws SQLException {
     try (final Connection conn = DriverManager.getConnection(url, user, password);

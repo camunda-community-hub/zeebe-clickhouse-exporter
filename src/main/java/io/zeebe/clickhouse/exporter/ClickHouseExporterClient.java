@@ -1,4 +1,13 @@
+/*
+ * Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+ * one or more contributor license agreements. See the NOTICE file distributed
+ * with this work for additional information regarding copyright ownership.
+ * Licensed under the Zeebe Community License 1.1. You may not use this file
+ * except in compliance with the Zeebe Community License 1.1.
+ */
 package io.zeebe.clickhouse.exporter;
+
+import static io.zeebe.clickhouse.exporter.importer.ClickHouseConfig.*;
 
 import io.camunda.zeebe.protocol.record.Record;
 import io.camunda.zeebe.protocol.record.RecordType;
@@ -20,16 +29,17 @@ public class ClickHouseExporterClient {
   ClickHouseExporterClient(final ExporterConfiguration configuration, final Logger logger) {
     this.configuration = configuration;
     this.logger = logger;
+    logger.info("configuration--------------->" + configuration.toString());
     try {
       // 初始化配置表
-      ClickHouseConfig.CreateClickHouseConfigTable(
+      createClickHouseConfigTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
           clickHouseConfigTable);
       // 检查是否有初始化配置信息
       final long i =
-          ClickHouseConfig.queryClickHouseConfig(
+          queryClickHouseConfig(
               configuration.getChUrl(),
               configuration.getChUser(),
               configuration.getChPassword(),
@@ -37,7 +47,7 @@ public class ClickHouseExporterClient {
 
       if (i <= 0L) {
         // 执行初始化
-        ClickHouseConfig.InitClickHouseConfigTable(
+        initClickHouseConfigTable(
             configuration.getChUrl(),
             configuration.getChUser(),
             configuration.getChPassword(),
@@ -46,67 +56,67 @@ public class ClickHouseExporterClient {
         cfgPosition = i;
       }
       // 创建流程定义信息表
-      ClickHouseConfig.CreateProcessTable(
+      createProcessTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
           ValueType.PROCESS.name());
       // 创建流程实例表
-      ClickHouseConfig.CreateProcessInstanceTable(
+      createProcessInstanceTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
           ValueType.PROCESS_INSTANCE.name());
       // 创建任务实例表
-      ClickHouseConfig.CreateElementInstanceTable(
+      createElementInstanceTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
           elementInstanceTable);
       // 创建调度表
-      ClickHouseConfig.CreateJobTable(
+      createJobTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
           ValueType.JOB.name());
       // 创建流程变量表
-      ClickHouseConfig.CreateVariableTable(
+      createVariableTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
           ValueType.VARIABLE.name());
       // 创建事件表
-      ClickHouseConfig.CreateIncidentTable(
+      createIncidentTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
           ValueType.INCIDENT.name());
       // 创建定时器表
-      ClickHouseConfig.CreateTimerTable(
+      createTimerTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
           ValueType.TIMER.name());
       // 创建异常表
-      ClickHouseConfig.CreateErrorTable(
+      createErrorTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
           ValueType.ERROR.name());
       // 创建消息表
-      ClickHouseConfig.CreateMessageTable(
+      createMessageTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
           ValueType.MESSAGE.name());
       // 创建消息订阅表
-      ClickHouseConfig.CreateMessageSubscriptionTable(
+      createMessageSubscriptionTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
           ValueType.MESSAGE_SUBSCRIPTION.name());
       // 创建信号订阅表
-      ClickHouseConfig.CreateSignalSubscriptionTable(
+      createSignalSubscriptionTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),
@@ -315,7 +325,7 @@ public class ClickHouseExporterClient {
   // 更新记录位置
   public void update(final long lastPosition) {
     try {
-      ClickHouseConfig.updateClickHouseConfigTable(
+      updateClickHouseConfigTable(
           configuration.getChUrl(),
           configuration.getChUser(),
           configuration.getChPassword(),

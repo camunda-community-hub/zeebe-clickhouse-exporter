@@ -1,3 +1,10 @@
+/*
+ * Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+ * one or more contributor license agreements. See the NOTICE file distributed
+ * with this work for additional information regarding copyright ownership.
+ * Licensed under the Zeebe Community License 1.1. You may not use this file
+ * except in compliance with the Zeebe Community License 1.1.
+ */
 package io.zeebe.clickhouse.exporter;
 
 import io.camunda.zeebe.exporter.api.Exporter;
@@ -13,7 +20,6 @@ public class ClickHouseExporter implements Exporter {
 
   private ExporterConfiguration configuration;
   private ClickHouseExporterClient client;
-  private long lastPosition = -1;
 
   @Override
   public void configure(final Context context) {
@@ -34,7 +40,7 @@ public class ClickHouseExporter implements Exporter {
 
   @Override
   public void export(final Record<?> record) {
-    lastPosition = record.getPosition();
+    final long lastPosition = record.getPosition();
     client.insert(record, lastPosition);
     controller.updateLastExportedRecordPosition(lastPosition);
   }

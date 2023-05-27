@@ -7,14 +7,6 @@
     <version>1.0-SNAPSHOT</version>
     <name>zeebe-clickhouse-exporter</name>
 
-    <scm>
-      <url>https://github.com/camunda-community-hub/zeebe-clickhouse-exporter</url>
-      <connection>scm:git:git@github.com:camunda-community-hub/zeebe-clickhouse-exporter.git</connection>
-      <developerConnection>scm:git:git@github.com:camunda-community-hub/zeebe-clickhouse-exporter.git
-      </developerConnection>
-      <tag>HEAD</tag>
-    </scm>
-
     <parent>
         <groupId>org.camunda.community</groupId>
         <artifactId>community-hub-release-parent</artifactId>
@@ -22,36 +14,78 @@
         <relativePath/>
     </parent>
 
+    <licenses>
+      <license>
+        <name>Zeebe Community License v1.1</name>
+        <url>https://zeebe.io/legal/zeebe-community-license-1.1</url>
+      </license>
+    </licenses>
+
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.java>17</version.java>
+      <!-- release parent settings -->
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <version.java>17</version.java>
+      <nexus.snapshot.repository>
+        https://artifacts.camunda.com/artifactory/zeebe-io-snapshots/
+      </nexus.snapshot.repository>
+      <nexus.release.repository>https://artifacts.camunda.com/artifactory/zeebe-io/
+      </nexus.release.repository>
 
+      <!-- Zeebe Community License v1.1 header -->
+      <!--suppress UnresolvedMavenProperty -->
+      <license.header>${maven.multiModuleProjectDirectory}/COPYING-HEADER.txt</license.header>
 
-        <!-- project dependencies -->
-        <version.zeebe>8.2.5</version.zeebe>
-        <version.log4j>2.20.0</version.log4j>
-        <version.junit>5.9.3</version.junit>
-        <versin.assertj>3.24.2</versin.assertj>
-        <version.testcontainers>1.18.1</version.testcontainers>
-        <version.zeebe-test-container>3.5.2</version.zeebe-test-container>
-        <version.awaitility>4.2.0</version.awaitility>
-        <version.clickhouse-jdbc>0.4.6</version.clickhouse-jdbc>
-        <version.commons-io>2.12.0</version.commons-io>
-        <version.commons-lang3>3.12.0</version.commons-lang3>
+      <!-- project dependencies -->
+      <version.zeebe>8.2.5</version.zeebe>
+      <version.log4j>2.20.0</version.log4j>
+      <version.junit>5.9.3</version.junit>
+      <versin.assertj>3.24.2</versin.assertj>
+      <version.testcontainers>1.18.1</version.testcontainers>
+      <version.zeebe-test-container>3.5.2</version.zeebe-test-container>
+      <version.awaitility>4.2.0</version.awaitility>
+      <version.checkstyle>9.3</version.checkstyle>
+      <version.revapi>0.26.1</version.revapi>
+      <version.clickhouse-jdbc>0.4.6</version.clickhouse-jdbc>
+      <version.commons-io>2.12.0</version.commons-io>
+      <version.commons-lang3>3.12.0</version.commons-lang3>
 
-        <!-- plugin version -->
-        <plugin.compiler.version>3.11.0</plugin.compiler.version>
-        <plugin.enforcer.version>3.3.0</plugin.enforcer.version>
-        <plugin.javadoc.version>3.5.0</plugin.javadoc.version>
-        <plugin.surefire.version>3.1.0</plugin.surefire.version>
-        <plugin.fmt.version>2.20</plugin.fmt.version>
-        <plugin.jacoco.version>0.8.10</plugin.jacoco.version>
-        <plugin.shade.version>3.4.1</plugin.shade.version>
-        <plugin.spotless.version>2.34.0</plugin.spotless.version>
+      <!-- plugin version -->
+      <plugin.version.animal-sniffer>1.21</plugin.version.animal-sniffer>
+      <plugin.version.assembly>3.3.0</plugin.version.assembly>
+      <plugin.version.compiler>3.11.0</plugin.version.compiler>
+      <plugin.version.checkstyle>3.1.2</plugin.version.checkstyle>
+      <plugin.version.clean>3.1.0</plugin.version.clean>
+      <plugin.version.dependency>3.1.2</plugin.version.dependency>
+      <plugin.version.enforcer>3.3.0</plugin.version.enforcer>
+      <plugin.version.failsafe>3.0.0-M5</plugin.version.failsafe>
+      <plugin.version.fmt>2.20</plugin.version.fmt>
+      <plugin.version.gpg>3.0.1</plugin.version.gpg>
+      <plugin.version.javadoc>3.5.0</plugin.version.javadoc>
+      <plugin.version.license>4.1</plugin.version.license>
+      <plugin.version.protobuf>0.6.1</plugin.version.protobuf>
+      <plugin.version.proto-compat>1.0.6</plugin.version.proto-compat>
+      <plugin.version.revapi>0.14.6</plugin.version.revapi>
+      <plugin.version.surefire>3.1.0</plugin.version.surefire>
 
+      <!-- maven extensions -->
+      <extension.version.os-maven-plugin>1.6.1</extension.version.os-maven-plugin>
 
-        <!-- disable jdk8 javadoc checks on release build -->
-        <additionalparam>-Xdoclint:none</additionalparam>
+      <!-- disable jdk8 javadoc checks on release build -->
+      <additionalparam>-Xdoclint:none</additionalparam>
+
+      <!--
+        you can use the following to disable specific checks. the approach taken is to use a single
+        new property, skipChecks, which is the default value for pre-defined properties such as
+        checkstyle.skip. that way, you can use skipChecks, but you can also still use checkstyle.skip
+        if you only want to disable checkstyle
+        -->
+      <skipChecks>false</skipChecks>
+      <checkstyle.skip>${skipChecks}</checkstyle.skip>
+      <dependency-check.skip>${skipChecks}</dependency-check.skip>
+      <enforcer.skip>${skipChecks}</enforcer.skip>
+      <mdep.analyze.skip>${skipChecks}</mdep.analyze.skip>
+      <revapi.skip>${skipChecks}</revapi.skip>
+      <spotless.check.skip>${skipChecks}</spotless.check.skip>
     </properties>
 
     <dependencyManagement>
@@ -150,117 +184,406 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-enforcer-plugin</artifactId>
-              <version>${plugin.enforcer.version}</version>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- compiler -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${plugin.version.compiler}</version>
+        </plugin>
+
+        <!-- JAVADOC -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${plugin.version.javadoc}</version>
+          <configuration>
+            <source>${version.java}</source>
+          </configuration>
+        </plugin>
+
+        <!-- LICENSE PLUGIN -->
+        <plugin>
+          <groupId>com.mycila</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>${plugin.version.license}</version>
+          <configuration>
+            <header>${license.header}</header>
+            <properties>
+              <owner>camunda services GmbH</owner>
+              <email>info@camunda.com</email>
+            </properties>
+            <includes>
+              <include>**/*.java</include>
+            </includes>
+            <mapping>
+              <java>SLASHSTAR_STYLE</java>
+            </mapping>
+          </configuration>
+          <executions>
+            <execution>
+              <id>add-license</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>format</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- CHECKSTYLE -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${plugin.version.checkstyle}</version>
+          <!-- dependency on build tool to reference the checkstyle cfg -->
+          <dependencies>
+            <dependency>
+              <groupId>io.camunda</groupId>
+              <artifactId>zeebe-build-tools</artifactId>
+              <version>${version.zeebe}</version>
+            </dependency>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${version.checkstyle}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <configLocation>check/.checkstyle.xml</configLocation>
+            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+            <encoding>UTF-8</encoding>
+            <failOnViolation>true</failOnViolation>
+            <sourceDirectories>
+              <sourceDirectory>${project.build.sourceDirectory}</sourceDirectory>
+              <sourceDirectory>${project.build.testSourceDirectory}</sourceDirectory>
+            </sourceDirectories>
+          </configuration>
+          <executions>
+            <execution>
+              <id>validate-java</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
               <configuration>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- unit tests -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${plugin.version.surefire}</version>
+          <configuration>
+            <failIfNoTests>false</failIfNoTests>
+            <trimStackTrace>false</trimStackTrace>
+            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+            <properties>
+              <configurationParameters>
+                junit.jupiter.execution.parallel.enabled = true
+                junit.jupiter.execution.parallel.mode.default = same_thread
+                junit.jupiter.execution.parallel.config.strategy = dynamic
+                junit.jupiter.execution.parallel.config.dynamic.factor = 2
+              </configurationParameters>
+            </properties>
+          </configuration>
+        </plugin>
+
+        <!-- integration tests -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>${plugin.version.failsafe}</version>
+          <configuration>
+            <failIfNoTests>false</failIfNoTests>
+            <trimStackTrace>false</trimStackTrace>
+            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+            <properties>
+              <configurationParameters>
+                junit.jupiter.execution.parallel.enabled = true
+                junit.jupiter.execution.parallel.mode.default = same_thread
+                junit.jupiter.execution.parallel.config.strategy = dynamic
+                junit.jupiter.execution.parallel.config.dynamic.factor = 2
+              </configurationParameters>
+            </properties>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>integration-test</goal>
+                <goal>verify</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- Google code format plugin -->
+        <plugin>
+          <groupId>com.spotify.fmt</groupId>
+          <artifactId>fmt-maven-plugin</artifactId>
+          <version>${plugin.version.fmt}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>format</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- jar with dependency assembly -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${plugin.version.assembly}</version>
+        </plugin>
+
+        <!-- enforce unique dependencies and convergence -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${plugin.version.enforcer}</version>
+          <executions>
+            <execution>
+              <id>enforce-dependency-convergence</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <!-- see more https://maven.apache.org/enforcer/enforcer-rules/index.html -->
                 <rules>
-                  <dependencyConvergence/>
+                  <banDuplicatePomDependencyVersions />
+                  <requireJavaVersion>
+                    <version>[11,)</version>
+                  </requireJavaVersion>
+                  <requireMavenVersion>
+                    <version>[3.6,)</version>
+                  </requireMavenVersion>
                 </rules>
               </configuration>
-              <executions>
-                <execution>
-                  <phase>verify</phase>
-                  <goals>
-                    <goal>enforce</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-javadoc-plugin</artifactId>
-              <version>${plugin.javadoc.version}</version>
-            </plugin>
+            </execution>
+          </executions>
+        </plugin>
 
-            <!-- Google code format plugin -->
-            <plugin>
-              <groupId>com.spotify.fmt</groupId>
-              <artifactId>fmt-maven-plugin</artifactId>
-              <version>${plugin.fmt.version}</version>
-              <executions>
-                <execution>
-                  <goals>
-                    <goal>format</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
+        <!-- enforce version of clean plugin -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${plugin.version.clean}</version>
+        </plugin>
 
-            <!-- JaCoCo Plugin -->
-            <plugin>
-              <groupId>org.jacoco</groupId>
-              <artifactId>jacoco-maven-plugin</artifactId>
-              <version>${plugin.jacoco.version}</version>
-              <executions>
-                <execution>
-                  <id>coverage-initialize</id>
-                  <goals>
-                    <goal>prepare-agent</goal>
-                  </goals>
-                </execution>
-                <execution>
-                  <id>coverage-report</id>
-                  <phase>post-integration-test</phase>
-                  <goals>
-                    <goal>report</goal>
-                  </goals>
-                </execution>
-                <!-- Threshold -->
-              </executions>
-            </plugin>
-            <!-- Surefire plugin -->
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-surefire-plugin</artifactId>
-              <version>${plugin.surefire.version}</version>
-            </plugin>
+        <!-- compatibility checks/guard -->
+        <plugin>
+          <groupId>org.revapi</groupId>
+          <artifactId>revapi-maven-plugin</artifactId>
+          <version>${plugin.version.revapi}</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.revapi</groupId>
+              <artifactId>revapi-java</artifactId>
+              <version>${version.revapi}</version>
+            </dependency>
+          </dependencies>
+          <executions>
+            <execution>
+              <phase>verify</phase>
+              <id>check</id>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <checkDependencies>true</checkDependencies>
+            <expandProperties>true</expandProperties>
+            <failOnMissingConfigurationFiles>true</failOnMissingConfigurationFiles>
+            <analysisConfigurationFiles combine.children="append">
+              <configurationFile>
+                <!--suppress UnresolvedMavenProperty -->
+                <path>${maven.multiModuleProjectDirectory}/revapi.json</path>
+              </configurationFile>
+            </analysisConfigurationFiles>
+          </configuration>
+        </plugin>
 
-            <!-- flaky test extractor plugin -->
-            <plugin>
-              <groupId>io.zeebe</groupId>
-              <artifactId>flaky-test-extractor-maven-plugin</artifactId>
-              <version>2.1.1</version>
-              <executions>
-                <execution>
-                  <phase>post-integration-test</phase>
-                  <goals>
-                    <goal>extract-flaky-tests</goal>
-                  </goals>
-                </execution>
-              </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${plugin.compiler.version}</version>
-                <configuration>
-                    <showWarnings>true</showWarnings>
-                    <compilerArgs>
-                        <arg>-Xlint:all</arg>
-                        <!-- arg>-Werror</arg -->
-                    </compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>${plugin.shade.version}</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>animal-sniffer-maven-plugin</artifactId>
+          <version>${plugin.version.animal-sniffer}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <outputDirectory>${project.build.directory}</outputDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>assemble-all</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>assemble-for-jib</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/jib</outputDirectory>
+              <finalName>${project.artifactId}</finalName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- copies the exporter jar-with-dependencies to a well known location such that it can be
+     mounted in the container -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>io.zeebe.clickhouse</groupId>
+                  <artifactId>zeebe-clickhouse-exporter</artifactId>
+                  <version>${project.version}</version>
+                  <type>jar</type>
+                  <classifier>jar-with-dependencies</classifier>
+                  <outputDirectory>${project.basedir}/src/test/resources</outputDirectory>
+                  <destFileName>zeebe-clickhouse-exporter.jar</destFileName>
+                </artifactItem>
+              </artifactItems>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>true</overWriteSnapshots>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>com.mycila</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>com.spotify.fmt</groupId>
+        <artifactId>fmt-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <profile>
+      <id>community-action-maven-release</id>
+      <properties>
+        <skipChecks>true</skipChecks>
+        <performRelease>true</performRelease>
+      </properties>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>${plugin.version.gpg}</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <!-- Prevent gpg from using pinentry programs -->
+              <gpgArguments>
+                <arg>--pinentry-mode</arg>
+                <arg>loopback</arg>
+              </gpgArguments>
+            </configuration>
+          </plugin>
         </plugins>
-    </build>
+      </build>
+    </profile>
+  </profiles>
+
+  <repositories>
+    <repository>
+      <id>zeebe</id>
+      <name>Zeebe Repository</name>
+      <url>https://artifacts.camunda.com/artifactory/zeebe-io/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+
+    <repository>
+      <id>zeebe-snapshots</id>
+      <name>Zeebe Snapshot Repository</name>
+      <url>https://artifacts.camunda.com/artifactory/zeebe-io-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <scm>
+    <url>https://github.com/camunda-community-hub/zeebe-clickhouse-exporter</url>
+    <connection>scm:git:git@github.com:camunda-community-hub/zeebe-clickhouse-exporter.git</connection>
+    <developerConnection>scm:git:git@github.com:camunda-community-hub/zeebe-clickhouse-exporter.git
+    </developerConnection>
+    <tag>HEAD</tag>
+  </scm>
 </project>

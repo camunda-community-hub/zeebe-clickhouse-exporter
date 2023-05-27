@@ -1,8 +1,14 @@
+/*
+ * Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+ * one or more contributor license agreements. See the NOTICE file distributed
+ * with this work for additional information regarding copyright ownership.
+ * Licensed under the Zeebe Community License 1.1. You may not use this file
+ * except in compliance with the Zeebe Community License 1.1.
+ */
 package io.zeebe.clickhouse.exporter.importer;
 
 import io.camunda.zeebe.protocol.record.Record;
 import io.camunda.zeebe.protocol.record.value.deployment.Process;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
@@ -40,14 +46,11 @@ public class ProcessImporter {
         // 版本号
         ps.setInt(7, process.getVersion());
         // 模型定义信息
-        final String resource = new String(process.getResource(), StandardCharsets.UTF_8.name());
+        final String resource = new String(process.getResource(), StandardCharsets.UTF_8);
         ps.setString(8, resource);
 
         ps.addBatch();
         ps.executeBatch();
-
-      } catch (final UnsupportedEncodingException e) {
-        e.printStackTrace();
       }
     }
   }
