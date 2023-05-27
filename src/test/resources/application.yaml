@@ -1,0 +1,6 @@
+zeebe:
+  broker:
+    exporters:
+      clickhouse:
+        className: io.zeebe.clickhouse.exporter.ClickHouseExporter
+        jarPath: exporters/zeebe-clickhouse-exporter.jar
