@@ -127,8 +127,8 @@ public class ClickHouseExporterClient {
     }
   }
   /** 执行数据导出 * */
-  public void insert(final Record<?> record, final long lastPostion) {
-    if ((lastPostion > cfgPosition || cfgPosition == -1L)
+  public void insert(final Record<?> record, final long lastPosition) {
+    if ((lastPosition > cfgPosition || cfgPosition == -1L)
         && RecordType.EVENT.name().equals(record.getRecordType().name())) {
 
       logger.info(
@@ -144,7 +144,7 @@ public class ClickHouseExporterClient {
               ValueType.PROCESS.name(),
               record);
           // 更新记录位置
-          update(lastPostion);
+          update(lastPosition);
         } catch (final SQLException e) {
           e.printStackTrace();
         }
@@ -169,7 +169,7 @@ public class ClickHouseExporterClient {
               elementInstanceTable,
               record);
           // 更新记录位置
-          update(lastPostion);
+          update(lastPosition);
         } catch (final SQLException e) {
           e.printStackTrace();
         }
@@ -186,7 +186,7 @@ public class ClickHouseExporterClient {
               ValueType.JOB.name(),
               record);
           // 更新记录位置
-          update(lastPostion);
+          update(lastPosition);
         } catch (final SQLException e) {
           e.printStackTrace();
         }
@@ -202,7 +202,7 @@ public class ClickHouseExporterClient {
               ValueType.VARIABLE.name(),
               record);
           // 更新记录位置
-          update(lastPostion);
+          update(lastPosition);
         } catch (final SQLException e) {
           e.printStackTrace();
         }
@@ -218,7 +218,7 @@ public class ClickHouseExporterClient {
               ValueType.INCIDENT.name(),
               record);
           // 更新记录位置
-          update(lastPostion);
+          update(lastPosition);
         } catch (final SQLException e) {
           e.printStackTrace();
         }
@@ -234,7 +234,7 @@ public class ClickHouseExporterClient {
               ValueType.TIMER.name(),
               record);
           // 更新记录位置
-          update(lastPostion);
+          update(lastPosition);
         } catch (final SQLException e) {
           e.printStackTrace();
         }
@@ -250,7 +250,7 @@ public class ClickHouseExporterClient {
               ValueType.ERROR.name(),
               record);
           // 更新记录位置
-          update(lastPostion);
+          update(lastPosition);
         } catch (final SQLException e) {
           e.printStackTrace();
         }
@@ -266,7 +266,7 @@ public class ClickHouseExporterClient {
               ValueType.MESSAGE.name(),
               record);
           // 更新记录位置
-          update(lastPostion);
+          update(lastPosition);
         } catch (final SQLException e) {
           e.printStackTrace();
         }
@@ -282,7 +282,7 @@ public class ClickHouseExporterClient {
               ValueType.MESSAGE_SUBSCRIPTION.name(),
               record);
           // 更新记录位置
-          update(lastPostion);
+          update(lastPosition);
         } catch (final SQLException e) {
           e.printStackTrace();
         }
@@ -298,7 +298,7 @@ public class ClickHouseExporterClient {
               ValueType.MESSAGE_SUBSCRIPTION.name(),
               record);
           // 更新记录位置
-          update(lastPostion);
+          update(lastPosition);
         } catch (final SQLException e) {
           e.printStackTrace();
         }
@@ -314,7 +314,7 @@ public class ClickHouseExporterClient {
               ValueType.SIGNAL_SUBSCRIPTION.name(),
               record);
           // 更新记录位置
-          update(lastPostion);
+          update(lastPosition);
         } catch (final SQLException e) {
           e.printStackTrace();
         }
