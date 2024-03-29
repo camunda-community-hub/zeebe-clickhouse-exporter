@@ -46,7 +46,7 @@
       <version.checkstyle>10.12.3</version.checkstyle>
       <version.revapi>0.28.1</version.revapi>
       <version.clickhouse-jdbc>0.4.6</version.clickhouse-jdbc>
-      <version.commons-io>2.13.0</version.commons-io>
+      <version.commons-io>2.16.0</version.commons-io>
       <version.commons-lang3>3.13.0</version.commons-lang3>
 
       <!-- plugin version -->
