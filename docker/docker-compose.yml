@@ -7,7 +7,7 @@ networks:
 services:
   clickhouse:
     container_name: clickhouse
-    image: clickhouse/clickhouse-server:22.8.15.23
+    image: clickhouse/clickhouse-server:22.12.6.22
     ulimits:
       nofile:
         soft: 262144
