@@ -41,7 +41,7 @@
       <version.junit>5.10.3</version.junit>
       <versin.assertj>3.26.0</versin.assertj>
       <version.testcontainers>1.19.8</version.testcontainers>
-      <version.zeebe-test-container>3.6.3</version.zeebe-test-container>
+      <version.zeebe-test-container>3.6.5</version.zeebe-test-container>
       <version.awaitility>4.2.1</version.awaitility>
       <version.checkstyle>10.17.0</version.checkstyle>
       <version.revapi>0.28.1</version.revapi>
