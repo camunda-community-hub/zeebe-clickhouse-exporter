@@ -48,7 +48,7 @@ jobs:
           files: target/surefire-reports/*.xml
       - if: github.event.release || github.event_name == 'workflow_dispatch'
         name: Deploy SNAPSHOT / Release
-        uses: camunda-community-hub/community-action-maven-release@v1
+        uses: camunda-community-hub/community-action-maven-release@v1.2.1
         with:
           release-version: ${{ github.event.release.tag_name }}
           release-profile: community-action-maven-release
