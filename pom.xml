@@ -50,7 +50,7 @@
       <version.commons-lang3>3.14.0</version.commons-lang3>
 
       <!-- plugin version -->
-      <plugin.version.animal-sniffer>1.23</plugin.version.animal-sniffer>
+      <plugin.version.animal-sniffer>1.24</plugin.version.animal-sniffer>
       <plugin.version.assembly>3.7.1</plugin.version.assembly>
       <plugin.version.compiler>3.13.0</plugin.version.compiler>
       <plugin.version.checkstyle>3.4.0</plugin.version.checkstyle>
