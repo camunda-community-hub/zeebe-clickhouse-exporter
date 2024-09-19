@@ -126,6 +126,7 @@ public class ClickHouseExporterClient {
       e.printStackTrace();
     }
   }
+
   /** 执行数据导出 * */
   public void insert(final Record<?> record, final long lastPosition) {
     if ((lastPosition > cfgPosition || cfgPosition == -1L)
