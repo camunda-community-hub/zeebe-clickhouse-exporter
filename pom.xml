@@ -36,7 +36,7 @@
       <license.header>${maven.multiModuleProjectDirectory}/COPYING-HEADER.txt</license.header>
 
       <!-- project dependencies -->
-      <version.zeebe>8.6.5</version.zeebe>
+      <version.zeebe>8.6.6</version.zeebe>
       <version.log4j>2.20.0</version.log4j>
       <version.junit>5.11.3</version.junit>
       <versin.assertj>3.26.3</versin.assertj>
