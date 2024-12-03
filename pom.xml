@@ -45,7 +45,7 @@
       <version.awaitility>4.2.2</version.awaitility>
       <version.checkstyle>10.20.2</version.checkstyle>
       <version.revapi>0.28.1</version.revapi>
-      <version.clickhouse-jdbc>0.6.5</version.clickhouse-jdbc>
+      <version.clickhouse-jdbc>0.7.1-patch1</version.clickhouse-jdbc>
       <version.commons-io>2.17.0</version.commons-io>
       <version.commons-lang3>3.17.0</version.commons-lang3>
 
