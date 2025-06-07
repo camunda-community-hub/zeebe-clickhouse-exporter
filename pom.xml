@@ -38,7 +38,7 @@
       <!-- project dependencies -->
       <version.zeebe>8.6.5</version.zeebe>
       <version.log4j>2.20.0</version.log4j>
-      <version.junit>5.11.3</version.junit>
+      <version.junit>5.13.1</version.junit>
       <versin.assertj>3.26.3</versin.assertj>
       <version.testcontainers>1.20.4</version.testcontainers>
       <version.zeebe-test-container>3.6.5</version.zeebe-test-container>
