@@ -57,7 +57,7 @@
       <plugin.version.clean>3.4.0</plugin.version.clean>
       <plugin.version.dependency>3.1.2</plugin.version.dependency>
       <plugin.version.enforcer>3.5.0</plugin.version.enforcer>
-      <plugin.version.failsafe>3.5.2</plugin.version.failsafe>
+      <plugin.version.failsafe>3.5.3</plugin.version.failsafe>
       <plugin.version.fmt>2.27</plugin.version.fmt>
       <plugin.version.gpg>3.2.7</plugin.version.gpg>
       <plugin.version.javadoc>3.11.1</plugin.version.javadoc>
