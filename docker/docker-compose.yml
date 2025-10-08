@@ -29,7 +29,7 @@ services:
       
   zeebe:
     container_name: zeebe_broker
-    image: camunda/zeebe:8.7.7
+    image: camunda/zeebe:8.7.15
     environment:
       - ZEEBE_LOG_LEVEL=debug
       - ZEEBE_CLICKHOUSE_URL=jdbc:ch://clickhouse/default
