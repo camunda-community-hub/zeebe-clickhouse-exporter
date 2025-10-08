@@ -58,7 +58,7 @@
       <plugin.version.dependency>3.1.2</plugin.version.dependency>
       <plugin.version.enforcer>3.6.2</plugin.version.enforcer>
       <plugin.version.failsafe>3.5.4</plugin.version.failsafe>
-      <plugin.version.fmt>2.27</plugin.version.fmt>
+      <plugin.version.fmt>2.29</plugin.version.fmt>
       <plugin.version.gpg>3.2.8</plugin.version.gpg>
       <plugin.version.javadoc>3.11.2</plugin.version.javadoc>
       <plugin.version.license>5.0.0</plugin.version.license>
