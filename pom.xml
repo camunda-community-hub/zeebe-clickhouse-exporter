@@ -43,7 +43,7 @@
       <version.testcontainers>1.20.4</version.testcontainers>
       <version.zeebe-test-container>3.6.8</version.zeebe-test-container>
       <version.awaitility>4.3.0</version.awaitility>
-      <version.checkstyle>10.26.1</version.checkstyle>
+      <version.checkstyle>12.0.0</version.checkstyle>
       <version.revapi>0.28.4</version.revapi>
       <version.clickhouse-jdbc>0.9.0</version.clickhouse-jdbc>
       <version.commons-io>2.19.0</version.commons-io>
